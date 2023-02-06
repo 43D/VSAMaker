@@ -71,6 +71,10 @@
                 overflow-x: hidden;
                 overflow-y: auto;
             }
+            #back{
+                left: 0px;
+                top: 0px;
+            }
         }
 
         @media (orientation: portrait) {
@@ -99,8 +103,16 @@
 <body style="margin: 0px">
     <div id="div0" style="display: flex;">
         <div id="div1">
-            <div id="capture" style="padding: 10px; background: #f5da55">
-                <h4 style="color: #000; ">Hello world!</h4>
+            <div id="capture" style="position: fixed; z-index: 3000; " >
+                <div id="back" style="position: fixed;">
+
+                </div>
+                <div id="front" style="background-color: yellow; position: fixed; top: 0px; z-index: 1900;">
+
+                </div>
+                <div id="text">
+                    <span id="text-span" style="color: #000; ">Hello world!</span>
+                </div>
             </div>
         </div>
         <div id="div2">
@@ -123,16 +135,12 @@
                 </div>
                 <br>
                 <div>
-                    <label for="link">Imagem da matéria: </label>
-                    <br>
-                    <input id="link" type="url" placeholder="https://.ogg">
-                    <p>OR</p>
+                    <label for="image">Imagem da matéria: </label>
                     <input id="image" type="file" accept=".png, .jpg">
-
                 </div>
                 <br>
                 <div>
-                    <button id="btnSave" type="button">Criar</button>
+                    <button id="btnSave" type="button" style="width: 150px; font-size: 14pt;">Criar</button>
                 </div>
             </form>
         </div>

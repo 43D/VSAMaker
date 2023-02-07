@@ -44,14 +44,16 @@ function init() {
 }
 
 function horizontal() {
-    imageUrl = img1;
-    back.css("background-image", "url(" + imageUrl + ")");
+    back.css("background-image", "url(" + img1 + ")");
     back.css("background-repeat", "no-repeat");
     back.css("background-size", "contain");
     back.css("z-index", "2000");
 
     const w = $("#div1").width();
     const h = $("#div1").height();
+
+    front.css("left", 0);
+
 
     if ((h / 504) > (w / 403)) {
         //w 100
@@ -84,8 +86,7 @@ function horizontal() {
 }
 
 function vertical() {
-    imageUrl = img1;
-    back.css("background-image", "url(" + imageUrl + ")");
+    back.css("background-image", "url(" + img2 + ")");
     back.css("background-repeat", "no-repeat");
     back.css("background-size", "contain");
     back.css("z-index", "2000");
@@ -93,24 +94,26 @@ function vertical() {
     const w = $("#div1").width();
     const h = $("#div1").height();
 
-    if ((h / 504) > (w / 403)) {
+    if (h > w) {
         //w 100
         const i = w / 403 * 504;
         back.css("width", w);
-        back.css("height", i + "px");
+        back.css("height", w);
         capture.css("width", w);
-        capture.css("height", i + "px");
-        front.css("width", w);
-        front.css("height", (i * 0.44) + "px");
+        capture.css("height", w);
+        front.css("width", w * 0.55);
+        front.css("left", w * 0.45);
+        front.css("height", w);
     } else {
         //h 100
         const i = h / 504 * 403;
-        back.css("width", i + "px");
+        back.css("width", h);
         back.css("height", h);
-        capture.css("width", i + "px");
+        capture.css("width", h);
         capture.css("height", h);
-        front.css("width", i + "px");
-        front.css("height", (h * 0.44));
+        front.css("width", h * 0.55);
+        front.css("left", h * 0.45);
+        front.css("height", h);
     }
 
     if (window.matchMedia("(orientation: portrait)").matches) {

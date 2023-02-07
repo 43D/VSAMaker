@@ -7,27 +7,21 @@ const span = $("#text-span")
 const img1 = "./alxQq4G.png";
 const img2 = "./SuEz5Wp.png";
 
-$(function () {
-    $("#btnSave").click(function () {
-        getScreenShot();
-    });
+$(() => {
+    $("#btnSave").click(() => getScreenShot());
 
-    $('input[type=radio][name=template]').change(function () {
-        if (this.value === "vertical") {
-            vertical();
-        }
-        else if (this.value === "horizontal") {
-            horizontal();
-        }
-    });
+    $("#vertical").click(() => vertical());
+    $("#horizontal").click(() => horizontal());
+    $("#fsize").change(() => textChange());
+    $("#title").change(() => textChange());
+    $("#fline").change(() => textChange());
+    $("#fweight").change(() => textChange());
 
     imgFile.change(() => {
         try {
             const file = imgFile[0].files[0];
-            console.log(file);
-            console.log("--");
             serializator(file);
-        } catch (er) { 
+        } catch (er) {
 
         }
     });
@@ -43,7 +37,7 @@ async function serializator(file) {
     reader.readAsDataURL(file);
 }
 
-function showImg(b64){
+function showImg(b64) {
     front.css("background-image", "url(" + b64 + ")");
     front.css("background-repeat", "no-repeat");
     front.css("background-size", "cover");
@@ -68,6 +62,24 @@ function downloadBase64File(contentType, base64Data, fileName) {
 
 function init() {
     horizontal();
+    textChange();
+}
+
+function textChange() {
+    span.css("font-size", $("#fsize").val() + "pt");
+    span.css("line-height", $("#fline").val() + "px");
+    span.css("font-weight", $("#fweight").val());
+    const t = $("#title").val().replaceAll("\n", "<br>").split("\\alert");
+    let t2 = "";
+    t.forEach((text, id) => {
+        console.log(text, id);
+        if (id % 2 == 1) {
+            t2 += '<span class="alert">' + text + '</span>';
+        } else {
+            t2 += text;
+        }
+    })
+    span.html(t2);
 }
 
 function horizontal() {
@@ -91,6 +103,9 @@ function horizontal() {
         capture.css("height", i + "px");
         front.css("width", w);
         front.css("height", (i * 0.44) + "px");
+        text.css("width", w);
+        text.css("top", (i * 0.50) + "px");
+        text.css("height", (i * 0.50) + "px");
     } else {
         //h 100
         const i = h / 504 * 403;
@@ -100,14 +115,19 @@ function horizontal() {
         capture.css("height", h);
         front.css("width", i + "px");
         front.css("height", (h * 0.44));
+        text.css("width", i);
+        text.css("top", (h * 0.50) + "px");
+        text.css("height", (h * 0.50) + "px");
     }
 
     if (window.matchMedia("(orientation: portrait)").matches) {
         front.css("top", $("#div2").height() + "px");
+        text.css("top", (($("#div1").height() * 0.50) + $("#div2").height()) + "px");
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {
         front.css("top", "0px");
+        text.css("top", ($("#div1").height() * 0.50) + "px");
     }
 
 }
@@ -131,6 +151,9 @@ function vertical() {
         front.css("width", w * 0.55);
         front.css("left", w * 0.45);
         front.css("height", w);
+        text.css("width", w * 0.45);
+        text.css("top", 0 + "px");
+        text.css("height", w);
     } else {
         //h 100
         const i = h / 504 * 403;
@@ -141,14 +164,20 @@ function vertical() {
         front.css("width", h * 0.55);
         front.css("left", h * 0.45);
         front.css("height", h);
+        text.css("width", h * 0.45);
+        text.css("top", $("#div2").height() + "px");
+        text.css("height", h);
     }
 
     if (window.matchMedia("(orientation: portrait)").matches) {
         front.css("top", $("#div2").height() + "px");
+        text.css("top", $("#div2").height() + "px");
+        
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {
         front.css("top", "0px");
+        text.css("top", "0px");
     }
 
 }

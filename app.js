@@ -11,6 +11,15 @@ $(function () {
         getScreenShot();
     });
 
+    $('input[type=radio][name=template]').change(function () {
+        if (this.value === "vertical") {
+            vertical();
+        }
+        else if (this.value === "horizontal") {
+            horizontal();
+        }
+    });
+
     init();
 });
 
@@ -52,7 +61,7 @@ function horizontal() {
         capture.css("width", w);
         capture.css("height", i + "px");
         front.css("width", w);
-        front.css("height", (i*0.44) + "px");
+        front.css("height", (i * 0.44) + "px");
     } else {
         //h 100
         const i = h / 504 * 403;
@@ -61,15 +70,55 @@ function horizontal() {
         capture.css("width", i + "px");
         capture.css("height", h);
         front.css("width", i + "px");
-        front.css("height", (h*0.44));
+        front.css("height", (h * 0.44));
     }
 
     if (window.matchMedia("(orientation: portrait)").matches) {
         front.css("top", $("#div2").height() + "px");
-     }
-     
-     if (window.matchMedia("(orientation: landscape)").matches) {
+    }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
         front.css("top", "0px");
-     }
-    
+    }
+
+}
+
+function vertical() {
+    imageUrl = img1;
+    back.css("background-image", "url(" + imageUrl + ")");
+    back.css("background-repeat", "no-repeat");
+    back.css("background-size", "contain");
+    back.css("z-index", "2000");
+
+    const w = $("#div1").width();
+    const h = $("#div1").height();
+
+    if ((h / 504) > (w / 403)) {
+        //w 100
+        const i = w / 403 * 504;
+        back.css("width", w);
+        back.css("height", i + "px");
+        capture.css("width", w);
+        capture.css("height", i + "px");
+        front.css("width", w);
+        front.css("height", (i * 0.44) + "px");
+    } else {
+        //h 100
+        const i = h / 504 * 403;
+        back.css("width", i + "px");
+        back.css("height", h);
+        capture.css("width", i + "px");
+        capture.css("height", h);
+        front.css("width", i + "px");
+        front.css("height", (h * 0.44));
+    }
+
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        front.css("top", $("#div2").height() + "px");
+    }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        front.css("top", "0px");
+    }
+
 }

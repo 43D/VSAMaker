@@ -2,6 +2,7 @@ const capture = $("#capture");
 const back = $("#back");
 const front = $("#front");
 const text = $("#text");
+const imgFile = $("#image");
 const span = $("#text-span")
 const img1 = "./alxQq4G.png";
 const img2 = "./SuEz5Wp.png";
@@ -20,8 +21,34 @@ $(function () {
         }
     });
 
+    imgFile.change(() => {
+        try {
+            const file = imgFile[0].files[0];
+            console.log(file);
+            console.log("--");
+            serializator(file);
+        } catch (er) { 
+
+        }
+    });
+
     init();
 });
+
+async function serializator(file) {
+    let reader = new FileReader()
+    reader.onload = async function (base64) {
+        showImg(base64.target.result);
+    }
+    reader.readAsDataURL(file);
+}
+
+function showImg(b64){
+    front.css("background-image", "url(" + b64 + ")");
+    front.css("background-repeat", "no-repeat");
+    front.css("background-size", "cover");
+    front.css("background-position", "center");
+}
 
 function getScreenShot() {
     let c = capture[0];

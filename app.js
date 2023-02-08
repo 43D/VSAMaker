@@ -26,6 +26,14 @@ $(() => {
         }
     });
 
+    $(window).resize(function () {
+        const r = $('input[name=template]:checked').val();
+        if (r === "vertical")
+            vertical();
+        else
+            horizontal();
+    });
+
     init();
 });
 
@@ -72,7 +80,6 @@ function textChange() {
     const t = $("#title").val().replaceAll("\n", "<br>").split("\\alert");
     let t2 = "";
     t.forEach((text, id) => {
-        console.log(text, id);
         if (id % 2 == 1) {
             t2 += '<span class="alert">' + text + '</span>';
         } else {

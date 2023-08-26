@@ -4,11 +4,12 @@ const front = $("#front");
 const text = $("#text");
 const imgFile = $("#image");
 const span = $("#text-span")
-const img1 = "./alxQq4G.png";
-const img2 = "./SuEz5Wp.png";
+const img1 = "./src/models/0/0.png";
+const img2 = "./src/models/0/1.png";
 
 $(() => {
     $("#btnSave").click(() => getScreenShot());
+    $("#btnCopy").click(() => getScreenShotCopy());
 
     $("#vertical").click(() => vertical());
     $("#horizontal").click(() => horizontal());
@@ -58,6 +59,34 @@ function getScreenShot() {
         var t = canvas.toDataURL().replace("data:image/png;base64,", "");
         this.downloadBase64File('image/png', t, 'image');
     })
+}
+
+function getScreenShotCopy() {
+    let c = capture[0];
+    html2canvas(c).then((canvas) => {
+        var t = canvas.toDataURL().replace("data:image/png;base64,", "");
+        this.copyImageBase64File('image/png', t);
+    })
+}
+
+function copyImageBase64File(contentType, base64Data) {
+    navigator.permissions.query({ name: "clipboard-write" }).then(async (result) => {
+        if (result.state == "granted" || result.state == "prompt") {
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: contentType });
+
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    [blob.type]: blob
+                })
+            ]);
+        }
+    });
 }
 
 function downloadBase64File(contentType, base64Data, fileName) {
@@ -179,7 +208,7 @@ function vertical() {
     if (window.matchMedia("(orientation: portrait)").matches) {
         front.css("top", $("#div2").height() + "px");
         text.css("top", $("#div2").height() + "px");
-        
+
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {

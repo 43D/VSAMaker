@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você sabia animes Maker</title>
+    <style>
+        .alert {
+            color: #fdcf00;
+        }
+        p {
+            font-family: Verdana, Geneva, sans-serif;
+            font-style: normal;
+            font-variant: normal;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #645959;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #000;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #111;
+        }
+
+        #div0 {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        label {
+            font-size: 14pt;
+        }
+
+        input {
+            margin: 2px 25px;
+            width: 80%;
+        }
+
+        .iptRadio {
+            margin: 2px 25px;
+            width: unset;
+        }
+
+        #div1{
+            background-color: grey;
+        }
+
+        #div2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fdcf00;
+        }
+
+        @media (orientation: landscape) {
+            #legend-form {
+                font-size: 30pt;
+            }
+
+            #div0 {
+                flex-direction: row;
+            }
+
+            #div1 {
+                height: 100vh;
+                width: 70vw;
+                background-color: grey;
+            }
+
+            #div2 {
+                height: 100vh;
+                width: 30vw;
+            }
+
+            #div2 {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            #back {
+                left: 0px;
+                top: 0px;
+            }
+        }
+
+        @media (orientation: portrait) {
+            #legend-form {
+                font-size: 24pt;
+            }
+
+            #div0 {
+                flex-direction: column-reverse;
+            }
+
+            #div1 {
+                height: 100%;
+                width: 100vw;
+            }
+
+            #div2 {
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0px">
+    <div id="div0" style="display: flex;">
+        <div id="div1">
+            <div id="capture" style="position: fixed; z-index: 3000; ">
+                <div id="back" style="position: fixed;">
+
+                </div>
+                <div id="front" style="background-color: yellow; position: fixed; top: 0px; z-index: 1900;">
+
+                </div>
+                <div id="text" style="position: fixed; z-index: 2100; color: #fff;">
+                    <div style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
+                        <p style="text-align: center;" id="text-span">Hello world!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="div2">
+            <form action="javascript:void(0);" style="text-align: center; margin-bottom: 25px;">
+                <legend id="legend-form">VOCÊ SABIA ANIMES MAKER</legend>
+                <div>
+                    <label for="horizontal">Selecione meu modelo: </label>
+                    <br>
+                    <input class="iptRadio" checked type="radio" id="horizontal" name="template" value="horizontal" />
+                    <label for="horizontal">Horizontal</label>
+
+                    <input class="iptRadio" type="radio" id="vertical" name="template" value="vertical" />
+                    <label for="vertical">Vertical</label>
+                </div>
+                <br>
+                <div>
+                    <label for="fsize">Tamanho da fonte (pt): </label>
+                    <input style="width: auto;" step="2" type="number" value="22" min="3" max="99999999" id="fsize"
+                        name="fsize" />
+                    <br>
+                    <label for="fweight">Grossura da fonte: </label>
+                    <input style="width: auto;" step="300" type="number" value="700" min="100" max="99999999"
+                        id="fweight" name="fweight" />
+                    <br>
+                    <label for="fline">Espacamento (px): </label>
+                    <input style="width: auto;" step="2" type="number" value="37" min="5" max="99999999" id="fline"
+                        name="fline" />
+                    <br>
+                    <label for="title">Título da matéria: </label>
+                    <br>
+                    <textarea name="title" id="title" style="width: 80%;" rows="5">VOCÊ
+SABIA
+\alertANIMES!!!\alert
+VOCÊ
+SABIA
+\alertANIMES!!!\alert</textarea>
+                    <br>
+                    <span style="padding: 2px 20px;">Use \alert para destacar o texto em amarelo, exemplo: <br>eu queria é
+                        \alertvocê!!\alert</span>
+                </div>
+                <br>
+                <div>
+                    <label for="image">Imagem da matéria: </label>
+                    <input id="image" type="file" accept=".png, .jpg">
+                </div>
+                <br>
+                <div>
+                    <button id="btnCopy" type="button" style="width: 150px; font-size: 14pt;">Copiar imagem</button>
+                    <button id="btnSave" type="button" style="width: 150px; font-size: 14pt;">Baixar imagem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="./FileSaver.js"></script>
+    <script src="./classic/app.js"></script>
+</body>
+
+</html>

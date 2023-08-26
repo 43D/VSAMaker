@@ -4,8 +4,8 @@ const front = $("#front");
 const text = $("#text");
 const imgFile = $("#image");
 const span = $("#text-span")
-const img1 = "./src/models/0/0.png";
-const img2 = "./src/models/0/1.png";
+const img1 = "/VSAMaker/src/models/0/0.png";
+const img2 = "/VSAMaker/src/models/0/1.png";
 
 $(() => {
     $("#btnSave").click(() => getScreenShot());

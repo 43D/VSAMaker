@@ -10,6 +10,7 @@ const img2 = "./src/models/0/1.png";
 $(() => {
     $("#btnSave").click(() => getScreenShot());
     $("#btnCopy").click(() => getScreenShotCopy());
+    $("#btnBack").click(() => backPage());
 
     $("#vertical").click(() => vertical());
     $("#horizontal").click(() => horizontal());
@@ -216,4 +217,8 @@ function vertical() {
         text.css("top", "0px");
     }
 
+}
+
+function backPage(){
+    window.location.href = "https://43d.github.io/VSAMaker/";
 }
